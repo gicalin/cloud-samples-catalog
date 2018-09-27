@@ -5,17 +5,16 @@ using clouds.foundation.CodeList;
 
 entity Products: fnd.BusinessObject {
 	// general info
-	key ID: String(36);
-	name: localized String @(
+	name: localized String not null @(
 		title: '{i18n>name}',
 		Common.FieldControl: #Mandatory,
-		Capabilities.SearchRestrictions.Searchable
+		Search.defaultSearchElement
 	);
-	description: localized String @(
+	description: localized String not null @(
 		title: '{i18n>description}',
 		Common.FieldControl: #Mandatory
 	);
-	category: Association to Categories @(
+	category: Association to Categories not null @(
 		title: '{i18n>category}',
 		Common: {
 			Text: {$value: category.name, "@UI.TextArrangement": #TextOnly},
@@ -26,12 +25,12 @@ entity Products: fnd.BusinessObject {
 	image: fnd.ImageURL;
 
 	// price 
-	price: Decimal(10, 3) @(
+	price: Decimal(10, 3) not null @(
 		title: '{i18n>pricePerUnit}',
 		Measures.ISOCurrency: currency,
 		Common.FieldControl: #Mandatory
 	);
-	currency: fnd.Currency @(
+	currency: fnd.Currency not null @(
 		title: '{i18n>currency}',
 		Common.ValueList: {entity: 'Currencies', type: #fixed},
 		Common.FieldControl: #Mandatory
@@ -77,7 +76,7 @@ entity Products: fnd.BusinessObject {
 			ValueListWithFixedValues
 		}
 	);
-	baseUnit: Association to fnd.Measures.Units.Bases @(
+	baseUnit: Association to fnd.Measures.Units.Bases not null @(
 		title: '{i18n>baseUnit}',
 		Common: {
 			Text: {$value: baseUnit.name, "@UI.TextArrangement": #TextOnly},
@@ -87,7 +86,7 @@ entity Products: fnd.BusinessObject {
 	);
 
 	// supply
-	supplier: Association to Suppliers @(
+	supplier: Association to Suppliers not null @(
 		title: '{i18n>supplier}',
 		Common: {
 			Text: {$value: supplier.name, "@UI.TextArrangement": #TextOnly},
@@ -95,11 +94,12 @@ entity Products: fnd.BusinessObject {
 			FieldControl: #Mandatory
 		}
 	);
-	stock: Association to Stocks @title: '{i18n>productStock}';
+	stock: Association to Stocks not null @title: '{i18n>productStock}';
 }
 
 annotate Products with {
 	ID @(
+		odata.Type:'Edm.String',
 		title: '{i18n>product}', 
 		Common: {
 			SemanticObject: 'EPMProduct',
@@ -114,16 +114,14 @@ entity Suppliers: fnd.BusinessPartner {
 
 annotate Suppliers with {
 	ID @title: '{i18n>supplier}';
-	name @(
-		title: '{i18n>supplierName}',
-		Capabilities.SearchRestrictions.Searchable
-	);
+	name @title: '{i18n>supplierName}';
 }
 
 entity Categories: fnd.BusinessObject {
-	name: localized String @(
+	name: localized String not null @(
 		title: '{i18n>categoryName}',
-		Common.FieldControl: #Mandatory
+		Common.FieldControl: #Mandatory,
+		Search.defaultSearchElement
 	);
 	description: localized String @title: '{i18n>description}';
 }
@@ -133,7 +131,7 @@ annotate Categories with {
 }
 
 entity Stocks: fnd.BusinessObject {
-	quantity: Decimal(13, 3) @(
+	quantity: Decimal(13, 3) not null @(
 		title: '{i18n>quantity}',
 		Common.FieldControl: #Mandatory
 	);

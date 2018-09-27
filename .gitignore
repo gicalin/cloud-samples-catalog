@@ -1,9 +1,9 @@
 # project
-**/.che/
 **/node_modules/
 **/package-lock.json
 **/.npmrc
 **/*.log
+**/.project
 
 # root
 /.mta/
@@ -16,12 +16,12 @@ db/**/gen/
 srv/**/edmx/
 srv/.settings/
 srv/target/
-srv/.apt_generated/
+srv/.apt_generated*/
 srv/bin/
-srv/.project
 srv/.classpath
 srv/.factorypath
+srv/src/main/resources/connection.properties
 
 # app
-app/**/dist
-app/**/localService/*.xml
+ui-*/**/dist
+ui-*/**/localService/*.xml

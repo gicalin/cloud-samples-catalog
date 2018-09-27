@@ -27,10 +27,10 @@
 					"WEIGHTUNIT_CODE",
 					"NAME",
 					"DESCRIPTION",
-					"CREATED_BYUSER",
-					"MODIFIED_BYUSER",
-					"CREATED_AT",
-					"MODIFIED_AT"
+					"CREATEDBY",
+					"MODIFIEDBY",
+					"CREATEDAT",
+					"MODIFIEDAT"
 				]
 			}
 		},
@@ -48,10 +48,10 @@
 					"EMAILADDRESS",
 					"FAXNUMBER",
 					"PHONENUMBER",
-					"CREATED_BYUSER",
-					"CREATED_AT",
-					"MODIFIED_BYUSER",
-					"MODIFIED_AT"
+					"CREATEDBY",
+					"CREATEDAT",
+					"MODIFIEDBY",
+					"MODIFIEDAT"
 				]
 			}
 		},
@@ -68,10 +68,10 @@
 					"QUANTITY",
 					"AVAILABILITY_CODE",
 					"MINIMUMQUANTITY",
-					"CREATED_BYUSER",
-					"CREATED_AT",
-					"MODIFIED_BYUSER",
-					"MODIFIED_AT"
+					"CREATEDBY",
+					"CREATEDAT",
+					"MODIFIEDBY",
+					"MODIFIEDAT"
 				]
 			}
 		},
@@ -101,10 +101,10 @@
 					"ID",
 					"NAME",
 					"DESCRIPTION",
-					"CREATED_AT",
-					"MODIFIED_AT",
-					"CREATED_BYUSER",
-					"MODIFIED_BYUSER"
+					"CREATEDAT",
+					"MODIFIEDAT",
+					"CREATEDBY",
+					"MODIFIEDBY"
 				]
 			}
 		},

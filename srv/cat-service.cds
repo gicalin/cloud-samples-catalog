@@ -4,43 +4,54 @@ using clouds.products from '../db/model';
 using clouds.foundation as fnd from '@sap/cloud-samples-foundation';
 
 service CatalogService {
+	@Capabilities.SearchRestrictions.Searchable
 	entity Products @(
 		title: '{i18n>product}',
 		Common: {
 			SemanticKey: [ID],
 			SideEffects#BaseUnit: {
 				SourceProperties: [baseUnit_code],
-				TargetProperties: [baseUnit, modified_byUser, modified_at],
+				TargetEntities: [baseUnit],
 				EffectTypes: #ValueChange
 			},
 			SideEffects#DimensionUnit: {
 				SourceProperties: [dimensionUnit_code],
-				TargetProperties: [dimensionUnit, modified_byUser, modified_at],
+				TargetEntities: [dimensionUnit],
 				EffectTypes: #ValueChange
 			},
 			SideEffects#WeightUnit: {
 				SourceProperties: [weightUnit_code],
-				TargetProperties: [weightUnit, modified_byUser, modified_at],
+				TargetEntities: [weightUnit],
 				EffectTypes: #ValueChange
 			},
 			SideEffects#Category: {
 				SourceProperties: [category_ID],
-				TargetProperties: [category, modified_byUser, modified_at],
+				TargetEntities: [category],
 				EffectTypes: #ValueChange
 			},
 			SideEffects#Supplier: {
 				SourceProperties: [supplier_ID],
-				TargetProperties: [supplier, modified_byUser, modified_at],
+				TargetEntities: [supplier],
 				EffectTypes: #ValueChange
 			},
 			SideEffects#AdminData: {
-				SourceProperties: [name, description, price, currency, height, width, depth, weight],
-				TargetProperties: [modified_byUser, modified_at],
+				SourceProperties: [baseUnit_code, dimensionUnit_code, weightUnit_code, category_ID, supplier_ID, name, description, price, currency, height, width, depth, weight],
+				TargetProperties: [modifiedBy, modifiedAt],
 				EffectTypes: #ValueChange
 			}
 		}
 	) as projection on products.Products;
-	entity Categories @(title: '{i18n>category}') as projection on products.Categories;
+	@Capabilities.SearchRestrictions.Searchable
+	entity Categories @(
+		title: '{i18n>category}',
+		Common: {
+			SideEffects#AdminData: {
+				SourceProperties: [name, description],
+				TargetProperties: [modifiedBy, modifiedAt],
+				EffectTypes: #ValueChange
+			}
+		}
+	) as projection on products.Categories;
 	entity Suppliers @(
 		title: '{i18n>supplier}',
 		Communication.Contact: {
@@ -54,8 +65,6 @@ service CatalogService {
 			]}
 	) as projection on products.Suppliers excluding { address };
 	entity Stocks @(title: '{i18n>stock}') as projection on products.Stocks;
-
-	// Value Helps --> should be autoexposed
 	entity StockAvailabilities @(title: '{i18n>stockAvailability}') as projection on products.StockAvailabilities;
 	entity PriceRanges @(title: '{i18n>priceRange}') as projection on products.PriceRanges;
 	entity Currencies @(title: '{i18n>currency}') as projection on fnd.Currencies;

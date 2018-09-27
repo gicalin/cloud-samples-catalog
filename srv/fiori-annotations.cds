@@ -82,10 +82,10 @@ annotate cats.Products with @( // header-level annotations
 		FieldGroup#AdministrativeData: {
 			Label: '{i18n>administrativeData}',
 			Data: [
-				{$Type: 'UI.DataField', Value: created_byUser, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: created_at, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: modified_byUser, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: modified_at, "@UI.Importance": #Medium}
+				{$Type: 'UI.DataField', Value: createdBy, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: createdAt, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: modifiedBy, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: modifiedAt, "@UI.Importance": #Medium}
 			]
 		}
 	}
@@ -93,8 +93,6 @@ annotate cats.Products with @( // header-level annotations
 	ID @UI.HiddenFilter;
 	name @UI.HiddenFilter;
 	description @UI.MultiLineText;
-	created @UI.HiddenFilter;
-	modified @UI.HiddenFilter;
 	image @(
 		UI: {
 			IsImageURL,
@@ -114,8 +112,6 @@ annotate cats.Suppliers with @( // header-level annotations
 	emailAddress @UI.HiddenFilter;
 	faxNumber @UI.HiddenFilter;
 	phoneNumber @UI.HiddenFilter;
-	created @UI.HiddenFilter;
-	modified @UI.HiddenFilter;
 }
 
 annotate cats.Categories with @( // header-level annotations
@@ -141,8 +137,6 @@ annotate cats.Stocks with @( // header-level annotations
 ){ // element-level annotations
 	ID @UI.HiddenFilter;
 	quantity @UI.HiddenFilter;
-	created @UI.HiddenFilter;
-	modified @UI.HiddenFilter;
 }
 
 annotate cats.Currencies with @( // header-level annotations
