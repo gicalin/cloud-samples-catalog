@@ -100,7 +100,7 @@ entity Products: fnd.BusinessObject {
 annotate Products with {
 	ID @(
 		odata.Type:'Edm.String',
-		title: '{i18n>product}', 
+		title: '{i18n>product}',
 		Common: {
 			SemanticObject: 'EPMProduct',
 			Text: name
@@ -124,10 +124,42 @@ entity Categories: fnd.BusinessObject {
 		Search.defaultSearchElement
 	);
 	description: localized String @title: '{i18n>description}';
+
+	modifiedByE: Association to Employees on modifiedByE.emailAddress = modifiedBy;
 }
 
 annotate Categories with {
 	ID @title: '{i18n>category}';
+	modifiedBy @title: '{i18n>changedBy}'
+	@(
+		Common: {
+			Text: {
+				$value: modifiedByE.emailAddress,
+				"@UI.TextArrangement": #TextOnly
+			},
+			ValueList: {
+				entity: 'Employees',
+				type: #fixed,
+				Parameters: [
+					{
+						$Type: 'Common.ValueListParameterInOut',
+						LocalDataProperty: 'modifiedBy',
+						ValueListProperty: 'emailAddress'
+					},
+					{
+						$Type: 'Common.ValueListParameterOut',
+						LocalDataProperty: 'modifiedByE',
+						ValueListProperty: 'name'
+					},
+					{
+						$Type: 'Common.ValueListParameterOut',
+						LocalDataProperty: 'modifiedByE',
+						ValueListProperty: 'firstName'
+					},
+				]
+			}
+		}
+	);
 }
 
 entity Stocks: fnd.BusinessObject {
@@ -173,4 +205,11 @@ entity PriceRanges: CodeList {
 
 annotate PriceRanges with {
 	name @title: '{i18n>priceRange}';
+}
+
+entity Employees: fnd.Person, fnd.BusinessObject {}
+annotate Employees with {
+	ID @title: '{i18n>employee}';
+	name @title: '{i18n>employeeName}';
+	emailAddress @title: '{i18n>employeeEmail}';
 }

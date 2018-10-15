@@ -118,7 +118,19 @@ annotate cats.Categories with @( // header-level annotations
 	UI.Identification: [ { $Type: 'UI.DataField', Value: name } ]
 ){ // element-level annotations
 	ID @UI.HiddenFilter;
-	name @UI.HiddenFilter;
+	modifiedBy @UI.HiddenFilter: true;
+	modifiedByE @UI.HiddenFilter: true;
+}
+
+annotate cats.Employees with @( // header-level annotations
+	UI.Identification: [ { $Type: 'UI.DataField', Value: emailAddress } ]
+) { // element-level annotations
+	ID @UI.HiddenFilter;
+	faxNumber @UI.HiddenFilter;
+	phoneNumber @UI.HiddenFilter;
+	firstName @UI.HiddenFilter: false;
+	mobilePhoneNumber @UI.HiddenFilter: true;
+	name @UI.HiddenFilter: false;
 }
 
 annotate cats.PriceRanges @( // header-level annotations

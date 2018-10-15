@@ -71,4 +71,13 @@ service CatalogService {
 	entity DimensionUnits @(title: '{i18n>dimensionUnit}') as projection on fnd.Measures.Units.Lengths;
 	entity WeightUnits @(title: '{i18n>weightUnit}') as projection on fnd.Measures.Units.Weights;
 	entity BaseUnits @(title: '{i18n>baseUnit}') as projection on fnd.Measures.Units.Bases;
+
+	entity Employees @(
+		title: '{i18n>employee}',
+		Communication.Contact: {
+			fn: name,
+			email: [
+				{type: #work, address: emailAddress}
+			]}
+	) as projection on products.Employees excluding { address };
 }
